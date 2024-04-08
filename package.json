@@ -1,0 +1,21 @@
+{
+  "name": "fullstack-sandbox",
+  "version": "1.0.0",
+  "description": "Just a sandbox for getting into fullstack development",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WaterGenie35",
+  "license": "ISC",
+  "engines": {
+    "npm": "1.5.0",
+    "node": "20.12.0"
+  },
+  "dependencies": {
+    "express": "4.19.2"
+  },
+  "devDependencies": {
+    "eslint": "9.0.0"
+  }
+}
