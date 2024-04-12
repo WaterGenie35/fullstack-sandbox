@@ -1,7 +1,7 @@
 import js from "@eslint/js";
-import globals from "globals";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jsdoc from "eslint-plugin-jsdoc";
+import globals from "globals";
 
 export default [
   js.configs.recommended,
