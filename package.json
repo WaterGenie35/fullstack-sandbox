@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Just a sandbox for getting into fullstack development",
   "main": "src/app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src"
   },
   "author": "WaterGenie35",
   "license": "ISC",
@@ -16,7 +18,9 @@
     "express": "4.19.2"
   },
   "devDependencies": {
+    "@eslint/js": "9.0.0",
     "eslint": "9.0.0",
+    "globals": "15.0.0",
     "prettier": "3.2.5"
   }
 }
