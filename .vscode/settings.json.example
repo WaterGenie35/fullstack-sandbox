@@ -1,5 +1,7 @@
 {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.requireConfig": true,
+    "prettier.configPath": "./prettier.config.js",
     "[javascript]": {
         "editor.formatOnSave": true
     }
