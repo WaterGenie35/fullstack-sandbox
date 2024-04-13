@@ -1,7 +1,7 @@
-import compression from "compression";
-import Debug from "debug";
-import express from "express";
-import helmet from "helmet";
+import compression from 'compression';
+import Debug from 'debug';
+import express from 'express';
+import helmet from 'helmet';
 
 const app = express();
 const port = 3000;
