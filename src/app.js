@@ -24,7 +24,6 @@ app.get("/", (request, response) => {
 app.use((request, response, next) => {
   response.status(404).send("Error: Not found");
 });
-
 app.use((error, request, response, next) => {
   console.error(error.stack);
   response.status(500).send("Error: Something went wrong");
@@ -32,5 +31,5 @@ app.use((error, request, response, next) => {
 
 app.listen(port, () => {
   debug("Test debug");
-  console.log(`Example app listening on port ${port}!`);
+  console.log(`Example app listening on port ${ port }!`);
 });
