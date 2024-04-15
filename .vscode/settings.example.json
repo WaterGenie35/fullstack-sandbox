@@ -8,7 +8,6 @@
     },
     "eslint.enable": true,
     "eslint.validate": [
-        "javscript",
-        "json"
+        "javscript"
     ]
 }
