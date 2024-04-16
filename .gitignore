@@ -1,5 +1,7 @@
 # Environment
-## Vscode
+.env
+
+# Vscode
 # https://stackoverflow.com/a/57749909
 .vscode/settings.json
 .vscode/tasks.json
@@ -8,3 +10,7 @@
 
 # Node
 node_modules
+
+# Prisma
+**/*.db
+**/*.db-journal

@@ -22,6 +22,7 @@
     "node": "v20.12.1"
   },
   "dependencies": {
+    "@prisma/client": "5.12.1",
     "compression": "1.7.4",
     "express": "4.19.2",
     "helmet": "7.1.0"
@@ -37,6 +38,7 @@
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "48.2.3",
-    "globals": "15.0.0"
+    "globals": "15.0.0",
+    "prisma": "5.12.1"
   }
 }
