@@ -9,5 +9,6 @@
     "eslint.enable": true,
     "eslint.validate": [
         "javscript"
-    ]
+    ],
+    "js/ts.implicitProjectConfig.strictFunctionTypes": true
 }

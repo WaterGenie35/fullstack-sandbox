@@ -51,5 +51,9 @@ node_modules
 - Install `@prisma/client` for the project
 
 ```bash
+# Setup
 npx prisma init --datasource-provider sqlite
+
+# Admin
+npx prisma studio
 ```
