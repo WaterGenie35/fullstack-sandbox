@@ -99,6 +99,7 @@ rules:
     }
   ]
   no-useless-backreference: error
+  object-shorthand: [ error, never ]
   require-atomic-updates: [ error, { allowProperties: false } ]
   use-isnan: [ error, {
       enforceForSwitchCase: true,
