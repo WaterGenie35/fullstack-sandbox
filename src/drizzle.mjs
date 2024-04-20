@@ -1,26 +1,27 @@
 import express from 'express';
 
+import { users } from './schema.mjs';
 import { generateUser } from './util.mjs';
 
 const router = express.Router();
 
 router.get('/', (request, response, next) => {
-  response.send("Prisma");
+  response.send("Drizzle");
 });
 
 router.get('/users', async (request, response, next) => {
-  const users = await request.prisma.user.findMany({
-    include: {
+  const users = await request.drizzle.query.users.findMany({
+    with: {
       posts: true
     }
   });
   response.send(users);
 });
 
-// TODO: look into typing the extended request
 router.post('/users', async (request, response, next) => {
   const user = generateUser();
-  await request.prisma.user.create({ data: user });
+  await request.drizzle.insert(users).values(user);
+  // TODO: see following through with relations like in prisma
 
   response.send(`Created new user: ${ user.username }, ${ user.email }`);
 });

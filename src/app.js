@@ -1,12 +1,20 @@
 import { PrismaClient } from '@prisma/client';
+import Database from 'better-sqlite3';
 import compression from 'compression';
 import Debug from 'debug';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
 import express from 'express';
 import helmet from 'helmet';
 
+import drizzleRouter from './drizzle.mjs';
 import prismaRouter from './prisma.mjs';
+import * as schema from './schema.mjs';
+import drizzleConfig from '../drizzle.config.mjs';
 
 const prisma = new PrismaClient();
+// TODO: how to add property via jsdoc?
+const sqliteClient = new Database(drizzleConfig.dbCredentials.url);
+const drizzleDB = drizzle(sqliteClient, { schema: schema });
 const app = express();
 const port = 3000;
 const debug = Debug('fullstack-sandbox');
@@ -22,6 +30,7 @@ app.use(compression());
 
 app.use((request, response, next) => {
   request.prisma = prisma;
+  request.drizzle = drizzleDB;
   next();
 });
 
@@ -30,6 +39,7 @@ app.get('/', (request, response) => {
 });
 
 app.use('/prisma', prismaRouter);
+app.use('/drizzle', drizzleRouter);
 
 // Deviate from express' default error responses (part of security practice)
 app.use((request, response, next) => {
@@ -50,6 +60,7 @@ process.on('SIGTERM', () => {
   debug("SIGTERM received; closing express server...");
   server.close(async () => {
     await prisma.$disconnect();
+    sqliteClient.close();
     debug("Express server closed");
   });
 });

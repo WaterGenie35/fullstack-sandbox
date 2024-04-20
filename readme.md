@@ -57,3 +57,14 @@ npx prisma init --datasource-provider sqlite
 # Admin
 npx prisma studio
 ```
+
+### Drizzle
+
+- Install `drizzle-kit` as development dependency for the CLI
+- Install SQL driver specific for the database being used
+
+```bash
+npx drizzle-kit generate:(pg|mysql|sqlite)
+# Consolidate migration code into a script for ease of use, e.g.:
+npm run migrate
+```

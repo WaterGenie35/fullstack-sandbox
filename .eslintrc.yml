@@ -94,7 +94,7 @@ rules:
   no-use-before-define: [ error, {
       functions: true,
       classes: true,
-      variables: true,
+      variables: false,
       allowNamedExports: false
     }
   ]
