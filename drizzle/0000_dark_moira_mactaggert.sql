@@ -1,5 +1,5 @@
 CREATE TABLE `posts` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`id` CHAR(26) PRIMARY KEY NOT NULL,
 	`title` text NOT NULL,
 	`content` text,
 	`published` integer,
@@ -7,7 +7,7 @@ CREATE TABLE `posts` (
 );
 --> statement-breakpoint
 CREATE TABLE `users` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`id` CHAR(26) PRIMARY KEY NOT NULL,
 	`email` text,
 	`username` text
 );

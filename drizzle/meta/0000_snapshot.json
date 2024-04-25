@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "972038a6-246e-4ffb-94be-f3d2d74c8614",
+  "id": "bbecd0f3-1fb9-4410-831c-4841daf75354",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "posts": {
@@ -9,10 +9,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "CHAR(26)",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "title": {
           "name": "title",
@@ -53,10 +53,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "CHAR(26)",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "email": {
           "name": "email",

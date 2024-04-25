@@ -52,3 +52,10 @@ npm run db-migrate
 # Drizzle studio:
 npm run db-studio
 ```
+
+#### Local Testing
+
+1. `npm run db-drop-migration` to select and remove migrations
+2. `npm run db-make-migration` to re-make the migrations
+3. `rm path/to/dev.db`
+3. `npm run db-migrate`
