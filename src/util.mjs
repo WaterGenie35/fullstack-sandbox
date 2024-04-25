@@ -14,7 +14,7 @@ export function capitalize (string) {
  * @param {number | null} seed
  * @returns user
  */
-export function generateUser (seed = null) {
+export function generateUser (seed = null, overrides = {}) {
   if (seed !== null) {
     faker.seed(seed);
   }
@@ -27,11 +27,26 @@ export function generateUser (seed = null) {
   return {
     username: username,
     email   : email,
-    // TODO: make this use post generator
+    // prisma syntax, remove later
     posts   : {
       create: {
         title: `Hi, I'm ${ username }!`
       }
-    }
+    },
+    ...overrides
+  };
+}
+
+export function generatePost (author, seed = null, overrides = {}) {
+  if (seed !== null) {
+    faker.seed(seed);
+  }
+
+  return {
+    title    : faker.lorem.sentence(),
+    content  : faker.lorem.paragraph(),
+    published: faker.datatype.boolean(),
+    authorId : author.id,
+    ...overrides
   };
 }
