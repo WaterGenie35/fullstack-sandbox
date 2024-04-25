@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import Database from 'better-sqlite3';
 import compression from 'compression';
 import Debug from 'debug';
@@ -7,11 +6,9 @@ import express from 'express';
 import helmet from 'helmet';
 
 import drizzleRouter from './drizzle.mjs';
-import prismaRouter from './prisma.mjs';
 import * as schema from './schema.mjs';
 import drizzleConfig from '../drizzle.config.mjs';
 
-const prisma = new PrismaClient();
 // TODO: how to add property via jsdoc?
 const sqliteClient = new Database(drizzleConfig.dbCredentials.url);
 const drizzleDB = drizzle(sqliteClient, { schema: schema });
@@ -29,7 +26,6 @@ app.disable('x-powered-by');
 app.use(compression());
 
 app.use((request, response, next) => {
-  request.prisma = prisma;
   request.drizzle = drizzleDB;
   next();
 });
@@ -38,7 +34,6 @@ app.get('/', (request, response) => {
   response.send("Hello World!");
 });
 
-app.use('/prisma', prismaRouter);
 app.use('/drizzle', drizzleRouter);
 
 // Deviate from express' default error responses (part of security practice)
@@ -59,7 +54,6 @@ const server = app.listen(port, () => {
 process.on('SIGTERM', () => {
   debug("SIGTERM received; closing express server...");
   server.close(async () => {
-    await prisma.$disconnect();
     sqliteClient.close();
     debug("Express server closed");
   });

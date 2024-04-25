@@ -26,7 +26,6 @@
     "node": "v20.12.1"
   },
   "dependencies": {
-    "@prisma/client": "5.12.1",
     "better-sqlite3": "9.5.0",
     "compression": "1.7.4",
     "dotenv": "16.4.5",
@@ -47,7 +46,6 @@
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "48.2.3",
-    "globals": "15.0.0",
-    "prisma": "5.12.1"
+    "globals": "15.0.0"
   }
 }

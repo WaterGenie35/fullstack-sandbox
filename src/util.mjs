@@ -27,12 +27,6 @@ export function generateUser (seed = null, overrides = {}) {
   return {
     username: username,
     email   : email,
-    // prisma syntax, remove later
-    posts   : {
-      create: {
-        title: `Hi, I'm ${ username }!`
-      }
-    },
     ...overrides
   };
 }

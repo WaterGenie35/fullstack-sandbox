@@ -45,19 +45,6 @@ npm install --save-exact [--save-dev] <package name> # -DE for short
 node_modules
 ```
 
-### Prisma
-
-- Install `prisma` as development dependency for the CLI
-- Install `@prisma/client` for the project
-
-```bash
-# Setup
-npx prisma init --datasource-provider sqlite
-
-# Admin
-npx prisma studio
-```
-
 ### Drizzle
 
 - Install `drizzle-kit` as development dependency for the CLI
