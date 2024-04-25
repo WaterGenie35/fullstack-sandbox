@@ -6,7 +6,7 @@
 
 ### Stack
 - [Express](https://expressjs.com/)
-- [Prisma](https://www.prisma.io/)
+- [Drizzle](https://orm.drizzle.team/)
 
 ## Setup
 
@@ -37,12 +37,6 @@ echo "engine-strict=true" > .npmrc
 
 ```bash
 npm install --save-exact [--save-dev] <package name> # -DE for short
-```
-
-### Git Ignore
-
-```bash
-node_modules
 ```
 
 ### Drizzle

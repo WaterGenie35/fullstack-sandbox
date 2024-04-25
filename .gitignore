@@ -11,6 +11,5 @@
 # Node
 node_modules
 
-# Prisma
+# DB
 **/*.db
-**/*.db-journal
