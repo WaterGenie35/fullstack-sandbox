@@ -45,7 +45,10 @@ npm install --save-exact [--save-dev] <package name> # -DE for short
 - Install SQL driver specific for the database being used
 
 ```bash
-npx drizzle-kit generate:(pg|mysql|sqlite)
-# Consolidate migration code into a script for ease of use, e.g.:
-npm run migrate
+# After schema changes:
+npm run db-make-migration
+npm run db-migrate
+
+# Drizzle studio:
+npm run db-studio
 ```

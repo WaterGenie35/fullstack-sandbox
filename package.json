@@ -8,17 +8,18 @@
     "entry": "./src/app.js",
     "node_dev_options": "--trace-sync-io",
     "migration_script": "./drizzle/migrate.js",
-    "drizzle_config": "./drizzle/drizzle.config.mjs"
+    "drizzle_config": "--config ./drizzle/drizzle.config.mjs"
   },
   "scripts": {
     "start": "node $npm_package_config_entry",
-    "start:dev": "node $npm_package_config_entry $npm_package_config_node_dev_options",
+    "start-dev": "node $npm_package_config_entry $npm_package_config_node_dev_options",
     "debug": "DEBUG=fullstack-sandbox npm run start:dev",
-    "debug:all": "DEBUG=* npm run start:dev",
+    "debug-all": "DEBUG=* npm run start:dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
-    "makeMigration": "npx drizzle-kit generate:sqlite --config $npm_package_config_drizzle_config",
-    "migrate": "node $npm_package_config_migration_script"
+    "db-make-migration": "npx drizzle-kit generate:sqlite $npm_package_config_drizzle_config",
+    "db-migrate": "node $npm_package_config_migration_script",
+    "db-studio": "npx drizzle-kit studio $npm_package_config_drizzle_config"
   },
   "author": "WaterGenie35",
   "license": "ISC",
@@ -43,7 +44,7 @@
     "@types/eslint__js": "8.42.3",
     "@types/express": "4.17.21",
     "debug": "4.3.4",
-    "drizzle-kit": "0.20.14",
+    "drizzle-kit": "0.20.17",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "48.2.3",
