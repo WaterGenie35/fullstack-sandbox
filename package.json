@@ -17,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "makeMigration": "npx drizzle-kit generate:sqlite",
-    "migrate": "node $migration_script"
+    "migrate": "node $npm_package_config_migration_script"
   },
   "author": "WaterGenie35",
   "license": "ISC",
