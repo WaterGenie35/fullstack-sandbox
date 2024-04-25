@@ -7,7 +7,8 @@
   "config": {
     "entry": "./src/app.js",
     "node_dev_options": "--trace-sync-io",
-    "migration_script": "./drizzle/migrate.js"
+    "migration_script": "./drizzle/migrate.js",
+    "drizzle_config": "./drizzle/drizzle.config.mjs"
   },
   "scripts": {
     "start": "node $npm_package_config_entry",
@@ -16,7 +17,7 @@
     "debug:all": "DEBUG=* npm run start:dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
-    "makeMigration": "npx drizzle-kit generate:sqlite",
+    "makeMigration": "npx drizzle-kit generate:sqlite --config $npm_package_config_drizzle_config",
     "migrate": "node $npm_package_config_migration_script"
   },
   "author": "WaterGenie35",

@@ -7,7 +7,7 @@ import helmet from 'helmet';
 
 import drizzleRouter from './drizzle.mjs';
 import * as schema from './schema.mjs';
-import drizzleConfig from '../drizzle.config.mjs';
+import drizzleConfig from '../drizzle/drizzle.config.mjs';
 
 // TODO: how to add property via jsdoc?
 const sqliteClient = new Database(drizzleConfig.dbCredentials.url);

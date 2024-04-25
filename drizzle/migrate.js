@@ -2,11 +2,11 @@ import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 
-import drizzleConfig from "../drizzle.config.mjs";
+import drizzleConfig from "./drizzle.config.mjs";
 import * as schema from '../src/schema.mjs';
 
-console.log(`Using sqlite db:\t${ drizzleConfig.dbCredentials.url }`);
 console.log(`Migration folder:\t${ drizzleConfig.out }`);
+console.log(`Using sqlite db:\t${ drizzleConfig.dbCredentials.url }`);
 
 const sqliteClient = new Database(drizzleConfig.dbCredentials.url);
 const drizzleDB = drizzle(sqliteClient, { schema: schema });
