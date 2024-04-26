@@ -11,6 +11,28 @@ export function capitalize (string) {
 }
 
 /**
+ * Removes hyphens, spaces, and underscores, and capitalize if case-insensitive
+ * @param {string} id
+ * @param {object} config
+ * @param {boolean} config.caseSensitive
+ * @returns {string}
+ */
+export function normalizeID (id, config = { caseSensitive: false }) {
+  const trimmedId = id.replace(/[-_ ]/g, '');
+  return config.caseSensitive ? trimmedId : trimmedId.toUpperCase();
+}
+
+/**
+ * Checks if the given candidate string is a valid ULID according to https://github.com/ulid/spec
+ * @param {string} candidateULID
+ * @returns {boolean} whether candidateULID is a valid ULID
+ */
+export function isValidULID (candidateULID) {
+  // https://github.com/yuzu441/is-ulid
+  return typeof candidateULID === 'string' && (/^[0-9A-HJKMNP-TV-Z]{26}/).test(candidateULID);
+}
+
+/**
  * @param {number | null} seed
  * @returns user
  */
