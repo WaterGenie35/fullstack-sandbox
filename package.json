@@ -13,8 +13,8 @@
   "scripts": {
     "start": "node $npm_package_config_entry",
     "start-dev": "node $npm_package_config_entry $npm_package_config_node_dev_options",
-    "debug": "DEBUG=fullstack-sandbox npm run start:dev",
-    "debug-all": "DEBUG=* npm run start:dev",
+    "debug": "DEBUG=fullstack-sandbox npm run start-dev",
+    "debug-all": "DEBUG=* npm run start-dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "db-make-migration": "npx drizzle-kit generate:sqlite $npm_package_config_drizzle_config",
