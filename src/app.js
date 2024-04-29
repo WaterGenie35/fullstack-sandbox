@@ -4,7 +4,6 @@ import Debug from 'debug';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import express from 'express';
 import helmet from 'helmet';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import drizzleRouter from './drizzle.mjs';
 import * as schema from './schema.mjs';
@@ -36,11 +35,6 @@ app.get('/', (request, response) => {
 });
 
 app.use('/drizzle', drizzleRouter);
-app.use('/db', createProxyMiddleware({
-  target      : 'http://local.drizzle.studio',
-  changeOrigin: true,
-  pathRewrite : { '^/db': '' }
-}));
 
 // Deviate from express' default error responses (part of security practice)
 app.use((request, response, next) => {
