@@ -2,10 +2,26 @@ import { relations } from "drizzle-orm";
 import { integer, text, sqliteTable, customType } from "drizzle-orm/sqlite-core";
 import { ulid as generateULID } from 'ulid';
 
+import { isValidULID, normalizeID } from "./util.mjs";
+
 // TODO: check how to type this with jsdoc (generics?)
 const ulidBuilder = customType({
-  dataType  : () => 'CHAR(26)',
-  toDriver  : (value) => value || generateULID(),
+  dataType: () => 'CHAR(26)',
+  toDriver: (value) => {
+    if (!value) {
+      return generateULID();
+    }
+    const normalizedValue = normalizeID(value, { caseSensitive: false });
+    if (!isValidULID(normalizedValue)) {
+      const isNormalized = value !== normalizedValue;
+      const normalizedMessage = isNormalized ? ` (normalized to '${ normalizedValue }')` : '';
+      throw new Error(`
+        Value '${ value }'${ normalizedMessage } is not a valid ULID.
+        Refer to https://github.com/ulid/spec for ULID specification.
+      `);
+    }
+    return normalizedValue;
+  },
   fromDriver: (value) => value
 });
 
