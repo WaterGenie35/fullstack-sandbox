@@ -6,21 +6,23 @@
   "type": "module",
   "config": {
     "entry": "./src/app.js",
-    "node_dev_options": "--trace-sync-io",
+    "node_dev": "--trace-sync-io",
     "migration_script": "./drizzle/migrate.js",
-    "drizzle_config": "--config ./drizzle/drizzle.config.mjs"
+    "drizzle": "--config ./drizzle/drizzle.config.mjs",
+    "docker": "--file ./docker/compose.yaml"
   },
   "scripts": {
-    "start": "node $npm_package_config_entry",
-    "start-dev": "node $npm_package_config_entry $npm_package_config_node_dev_options",
-    "debug": "DEBUG=fullstack-sandbox npm run start-dev",
-    "debug-all": "DEBUG=* npm run start-dev",
+    "start": "docker compose $npm_package_config_docker up --build",
+    "app": "node $npm_package_config_entry",
+    "app-dev": "node $npm_package_config_entry $npm_package_config_node_dev",
+    "debug": "DEBUG=fullstack-sandbox npm run app-dev",
+    "debug-all": "DEBUG=* npm run app-dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
-    "db-make-migration": "npx drizzle-kit generate:sqlite $npm_package_config_drizzle_config",
-    "db-drop-migration": "npx drizzle-kit drop $npm_package_config_drizzle_config",
+    "db-make-migration": "npx drizzle-kit generate:sqlite $npm_package_config_drizzle",
+    "db-drop-migration": "npx drizzle-kit drop $npm_package_config_drizzle",
     "db-migrate": "node $npm_package_config_migration_script",
-    "db-studio": "npx drizzle-kit studio $npm_package_config_drizzle_config"
+    "db-studio": "npx drizzle-kit studio $npm_package_config_drizzle"
   },
   "author": "WaterGenie35",
   "license": "ISC",
@@ -29,8 +31,10 @@
     "node": "v20.12.1"
   },
   "dependencies": {
+    "@faker-js/faker": "8.4.1",
     "better-sqlite3": "9.5.0",
     "compression": "1.7.4",
+    "debug": "4.3.4",
     "dotenv": "16.4.5",
     "drizzle-orm": "0.30.8",
     "express": "4.19.2",
@@ -39,13 +43,11 @@
   },
   "devDependencies": {
     "@eslint/js": "9.0.0",
-    "@faker-js/faker": "8.4.1",
     "@stylistic/eslint-plugin": "1.7.0",
     "@types/compression": "1.7.5",
     "@types/debug": "4.1.12",
     "@types/eslint__js": "8.42.3",
     "@types/express": "4.17.21",
-    "debug": "4.3.4",
     "drizzle-kit": "0.20.17",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
