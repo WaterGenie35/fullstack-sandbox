@@ -3,6 +3,7 @@
 ## Resources
 
 - [MDN's guide on server-side programming with express](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
+- [Docker's node.js language-specific guide](https://docs.docker.com/language/nodejs/)
 
 ### Stack
 - [Express](https://expressjs.com/)
@@ -13,6 +14,7 @@
 ```bash
 nvm use
 npm install
+npm start
 ```
 
 ## Development

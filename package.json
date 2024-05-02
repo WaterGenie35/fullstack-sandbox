@@ -12,7 +12,7 @@
     "docker": "--file ./docker/compose.yaml"
   },
   "scripts": {
-    "start": "docker compose $npm_package_config_docker up --build",
+    "start": "docker compose $npm_package_config_docker up --build --remove-orphans",
     "app": "node $npm_package_config_entry",
     "app-dev": "node $npm_package_config_entry $npm_package_config_node_dev",
     "debug": "DEBUG=fullstack-sandbox npm run app-dev",
