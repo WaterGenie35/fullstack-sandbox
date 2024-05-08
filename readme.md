@@ -55,6 +55,16 @@ npm run db-migrate
 npm run db-studio
 ```
 
+### WSL
+
+- Specify services that should automatically start in `/etc/wsl.conf`
+
+```bash
+# E.g.
+[boot]
+command="service docker start"
+```
+
 #### Local Testing
 
 1. `npm run db-drop-migration` to select and remove migrations
