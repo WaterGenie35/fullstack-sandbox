@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { postTable, userTable } from './schema.mjs';
-import { generatePost, generateUser } from './util.mjs';
+import { userTable, postTable } from './sqlite-schema.mjs';
+import { generatePost, generateUser } from '../util.mjs';
 
 const router = express.Router();
 

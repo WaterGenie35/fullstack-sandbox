@@ -7,8 +7,8 @@
   "config": {
     "entry": "./src/app.js",
     "node_dev": "--trace-sync-io",
-    "migration_script": "./drizzle/migrate.js",
-    "drizzle": "--config ./drizzle/drizzle.config.mjs",
+    "migration_script": "./drizzle/postgresql-migrate.js",
+    "drizzle": "--config ./drizzle/postgresql-drizzle.config.mjs",
     "docker": "--file ./docker/compose.yaml"
   },
   "scripts": {
@@ -19,7 +19,7 @@
     "debug-all": "DEBUG=* npm run app-dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
-    "db-make-migration": "npx drizzle-kit generate:sqlite $npm_package_config_drizzle",
+    "db-make-migration": "npx drizzle-kit generate:pg $npm_package_config_drizzle",
     "db-drop-migration": "npx drizzle-kit drop $npm_package_config_drizzle",
     "db-migrate": "node $npm_package_config_migration_script",
     "db-studio": "npx drizzle-kit studio $npm_package_config_drizzle"
@@ -36,10 +36,10 @@
     "compression": "1.7.4",
     "debug": "4.3.4",
     "dotenv": "16.4.5",
-    "drizzle-kit": "0.20.17",
     "drizzle-orm": "0.30.8",
     "express": "4.19.2",
     "helmet": "7.1.0",
+    "postgres": "3.4.4",
     "ulid": "2.3.0"
   },
   "devDependencies": {
@@ -49,10 +49,12 @@
     "@types/debug": "4.1.12",
     "@types/eslint__js": "8.42.3",
     "@types/express": "4.17.21",
+    "drizzle-kit": "0.21.1",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "48.2.3",
     "globals": "15.0.0",
-    "http-proxy-middleware": "3.0.0"
+    "http-proxy-middleware": "3.0.0",
+    "pg": "8.11.5"
   }
 }

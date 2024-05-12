@@ -1,17 +1,18 @@
-import Database from 'better-sqlite3';
 import compression from 'compression';
 import Debug from 'debug';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import express from 'express';
 import helmet from 'helmet';
+import postgres from 'postgres';
 
 import drizzleRouter from './drizzle.mjs';
 import * as schema from './schema.mjs';
-import drizzleConfig from '../drizzle/drizzle.config.mjs';
+import drizzleConfig from '../drizzle/postgresql-drizzle.config.mjs';
 
 // TODO: how to add property via jsdoc?
-const sqliteClient = new Database(drizzleConfig.dbCredentials.url);
-const drizzleDB = drizzle(sqliteClient, { schema: schema });
+const postgresqlClient = postgres(drizzleConfig.dbCredentials);
+const drizzleDB = drizzle(postgresqlClient, { schema: schema });
+
 const app = express();
 const port = 3000;
 const debug = Debug('fullstack-sandbox');
@@ -54,7 +55,7 @@ const server = app.listen(port, () => {
 process.on('SIGTERM', () => {
   debug("SIGTERM received; closing express server...");
   server.close(async () => {
-    sqliteClient.close();
+    await postgresqlClient.end();
     debug("Express server closed");
   });
 });

@@ -1,11 +1,12 @@
 import { relations } from "drizzle-orm";
-import { boolean, customType, pgTable, text } from 'drizzle-orm/pg-core';
+import { integer, text, sqliteTable, customType } from "drizzle-orm/sqlite-core";
 import { ulid as generateULID } from 'ulid';
 
-import { isValidULID, normalizeID } from './util.mjs';
+import { isValidULID, normalizeID } from "../util.mjs";
 
+// TODO: check how to type this with jsdoc (generics?)
 const ulidBuilder = customType({
-  dataType: () => 'CHARACTER(26)',
+  dataType: () => 'CHAR(26)',
   toDriver: (value) => {
     if (!value) {
       return generateULID();
@@ -37,7 +38,7 @@ const ulid = (name, config = { autoGenerate: true }) => {
   return type;
 };
 
-export const userTable = pgTable('users', {
+export const userTable = sqliteTable('users', {
   id      : ulid('id').primaryKey(),
   email   : text('email').unique(),
   username: text('username')
@@ -47,12 +48,12 @@ export const userRelations = relations(userTable, ({ many }) => ({
   posts: many(postTable)
 }));
 
-export const postTable = pgTable('posts', {
+export const postTable = sqliteTable('posts', {
   id       : ulid('id').primaryKey(),
   title    : text('title').notNull(),
   content  : text('content'),
-  published: boolean('published'),
-  authorId : ulid('author_id').references(() => userTable.id)
+  published: integer('published', { mode: 'boolean' }),
+  authorId : integer('author_id', { mode: 'number' }).notNull()
 });
 
 export const postRelations = relations(postTable, ({ one }) => ({

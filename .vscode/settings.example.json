@@ -4,7 +4,8 @@
         "source.fixAll": "explicit"
     },
     "[javascript]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "eslint.enable": true,
     "eslint.validate": [

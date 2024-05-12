@@ -4,6 +4,7 @@
 
 - [MDN's guide on server-side programming with express](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [Docker's node.js language-specific guide](https://docs.docker.com/language/nodejs/)
+- [Linuxize's guide on installing postgres on debian](https://linuxize.com/post/how-to-install-postgresql-on-debian-10/)
 
 ### Stack
 - [Express](https://expressjs.com/)
@@ -55,6 +56,10 @@ npm run db-migrate
 npm run db-studio
 ```
 
+### PostgreSQL
+
+- The `pg` driver is only for drizzle studio
+
 ### WSL
 
 - Specify services that should automatically start in `/etc/wsl.conf`
@@ -62,7 +67,7 @@ npm run db-studio
 ```bash
 # E.g.
 [boot]
-command="service docker start"
+command="service docker start && service postgresql start"
 ```
 
 #### Local Testing
