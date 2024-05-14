@@ -7,6 +7,9 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+# TODO: check where should we put initial migration related stuff
+# e.g. entrypoint, but entrypoint vs app/command?
+# e.g. postgres image's init script stuff?
 services:
   app:
     depends_on:
@@ -19,6 +22,9 @@ services:
       dockerfile: docker/Dockerfile
     env_file:
       - path: ../.env
+    environment:
+      # refers to the db service name
+      - DATABASE_HOST=db
     ports:
       # HOST_PORT:CONTAINER_PORT
       - 3000:3000
@@ -28,30 +34,45 @@ services:
     command: npm run app
   
   db:
+    # see postgres image doc:
+    # https://github.com/docker-library/docs/blob/master/postgres/README.md
     image: postgres
     restart: always
+    # postgres image already init db and user based on the env
+    # so we can use the init script only if we need something more
     environment:
-      - POSTGRES_DB=fullstack_sandbox
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      # refers to the secrets/db-password definition at the bottom of this file
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    user: watergenie
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
     secrets:
       - db-password
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      # https://stackoverflow.com/a/76669295
+      test: [
+        "CMD",
+        "pg_isready",
+        "--dbname=${DATABASE_NAME}",
+        "--username=${DATABASE_USER}"
+      ]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
+      # refers to the volumes/db-data definition at the bottom of this file
       - db-data:/var/lib/postgresql/data
-  
+
   studio:
     build:
       context: ..
       dockerfile: docker/Dockerfile
     env_file:
       - path: ../.env
+    # TODO: check this
     network_mode: host
     ports:
       - 4983:4983

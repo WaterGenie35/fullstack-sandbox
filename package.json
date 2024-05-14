@@ -9,10 +9,11 @@
     "node_dev": "--trace-sync-io",
     "migration_script": "./drizzle/postgresql-migrate.js",
     "drizzle": "--config ./drizzle/postgresql-drizzle.config.mjs",
-    "docker": "--file ./docker/compose.yaml"
+    "docker": "--file ./docker/compose.yaml --env-file ./.env"
   },
   "scripts": {
-    "start": "docker compose $npm_package_config_docker up --build --remove-orphans",
+    "start": "docker compose $npm_package_config_docker up --build",
+    "clean": "docker compose $npm_package_config_docker down --remove-orphans --volumes",
     "app": "node $npm_package_config_entry",
     "app-dev": "node $npm_package_config_entry $npm_package_config_node_dev",
     "debug": "DEBUG=fullstack-sandbox npm run app-dev",

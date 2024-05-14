@@ -58,7 +58,7 @@ npm run db-studio
 
 ### PostgreSQL
 
-- The `pg` driver is only for drizzle studio
+- The `pg` driver dependency is only for drizzle studio
 
 ### WSL
 
