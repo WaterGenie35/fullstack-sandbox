@@ -5,6 +5,9 @@ import { ulid as generateULID } from 'ulid';
 import { isValidULID, normalizeID } from './util.mjs';
 
 const ulidBuilder = customType({
+  // TODO: check how to define the data type;
+  // this currently outputs 'CHARACTER(26)' (with the quotes) in the generated sql
+  // instead of CHARACTER(26) (without the quotes)
   dataType: () => 'CHARACTER(26)',
   toDriver: (value) => {
     if (!value) {
