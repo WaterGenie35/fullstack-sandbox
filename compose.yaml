@@ -15,11 +15,11 @@ services:
         condition: service_healthy
     build:
       # relative to docker-compose command running directory
-      context: ..
+      context: .
       # relative to build > context
       dockerfile: docker/Dockerfile
     env_file:
-      - path: ../.env
+      - path: ./.env
     environment:
       # refers to the db service name
       - DATABASE_HOST=db
@@ -28,13 +28,14 @@ services:
       - 3000:3000
     volumes:
       # See Dockerfile WORKDIR
-      - ../drizzle:/usr/src/app/drizzle
+      - ./drizzle:/usr/src/app/drizzle
     entrypoint: ./entrypoint.sh
   
   db:
     # see postgres image doc:
     # https://github.com/docker-library/docs/blob/master/postgres/README.md
     image: postgres
+    attach: false
     restart: always
     # postgres image already init db and user based on the env
     # so we can use the init script only if we need something more
@@ -85,4 +86,4 @@ volumes:
 
 secrets:
   db-password:
-    file: ../drizzle/password.txt
+    file: ./drizzle/password.txt

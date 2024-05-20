@@ -8,15 +8,12 @@
     "entry": "./src/app.js",
     "node_dev": "--trace-sync-io",
     "migration_script": "./drizzle/postgresql-migrate.js",
-    "drizzle": "--config ./drizzle/postgresql-drizzle.config.mjs",
-    "docker": "--file ./docker/compose.yaml --env-file ./.env"
+    "drizzle": "--config ./drizzle/postgresql-drizzle.config.mjs"
   },
   "scripts": {
-    "start": "docker compose $npm_package_config_docker up --build",
-    "start-app": "docker compose $npm_package_config_docker up --build app",
-    "start-db": "docker compose $npm_package_config_docker up --build --detach db",
-    "stop": "docker compose $npm_package_config_docker down --remove-orphans",
-    "clean": "docker compose $npm_package_config_docker down --remove-orphans --volumes && docker image prune",
+    "start": "docker compose up --build",
+    "stop": "docker compose down --remove-orphans",
+    "clean": "docker compose down --remove-orphans --volumes && docker image prune",
     "app": "node $npm_package_config_entry",
     "app-dev": "node $npm_package_config_entry $npm_package_config_node_dev",
     "debug": "DEBUG=fullstack-sandbox npm run app-dev",
