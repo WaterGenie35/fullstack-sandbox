@@ -8,9 +8,6 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 
-# TODO: split (probably in package.json scripts) services
-# E.g. start and forget db (and other peripheral services like drizzle studio),
-# then work primarily with just app service
 services:
   app:
     depends_on:

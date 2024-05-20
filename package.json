@@ -13,7 +13,10 @@
   },
   "scripts": {
     "start": "docker compose $npm_package_config_docker up --build",
-    "clean": "docker compose $npm_package_config_docker down --remove-orphans --volumes",
+    "start-app": "docker compose $npm_package_config_docker up --build app",
+    "start-db": "docker compose $npm_package_config_docker up --build --detach db",
+    "stop": "docker compose $npm_package_config_docker down --remove-orphans",
+    "clean": "docker compose $npm_package_config_docker down --remove-orphans --volumes && docker image prune",
     "app": "node $npm_package_config_entry",
     "app-dev": "node $npm_package_config_entry $npm_package_config_node_dev",
     "debug": "DEBUG=fullstack-sandbox npm run app-dev",
