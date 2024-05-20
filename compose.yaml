@@ -18,8 +18,7 @@ services:
       context: .
       # relative to build > context
       dockerfile: docker/Dockerfile
-    env_file:
-      - path: ./.env
+    env_file: .env
     environment:
       # refers to the db service name
       - DATABASE_HOST=db
@@ -31,6 +30,7 @@ services:
       - ./drizzle:/usr/src/app/drizzle
     entrypoint: ./entrypoint.sh
   
+  # TODO: check migration workflow and update the package.json scripts
   db:
     # see postgres image doc:
     # https://github.com/docker-library/docs/blob/master/postgres/README.md
@@ -39,9 +39,8 @@ services:
     restart: always
     # postgres image already init db and user based on the env
     # so we can use the init script only if we need something more
+    env_file: .env
     environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_USER=${DATABASE_USER}
       # refers to the secrets/db-password definition at the bottom of this file
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
       - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
@@ -54,9 +53,7 @@ services:
       # https://stackoverflow.com/a/76669295
       test: [
         "CMD",
-        "pg_isready",
-        "--dbname=${DATABASE_NAME}",
-        "--username=${DATABASE_USER}"
+        "pg_isready"
       ]
       interval: 10s
       timeout: 5s
