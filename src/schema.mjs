@@ -4,6 +4,7 @@ import { ulid as generateULID } from 'ulid';
 
 import { isValidULID, normalizeID } from './util.mjs';
 
+// TODO: check how to type this with jsdoc (generics?)
 const ulidBuilder = customType({
   // TODO: check how to define the data type;
   // this currently outputs 'CHARACTER(26)' (with the quotes) in the generated sql

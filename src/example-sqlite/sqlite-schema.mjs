@@ -4,7 +4,6 @@ import { ulid as generateULID } from 'ulid';
 
 import { isValidULID, normalizeID } from "../util.mjs";
 
-// TODO: check how to type this with jsdoc (generics?)
 const ulidBuilder = customType({
   dataType: () => 'CHAR(26)',
   toDriver: (value) => {
