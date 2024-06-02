@@ -2,6 +2,8 @@
 
 ## Resources
 
+- [The Epic Stack](https://github.com/epicweb-dev/epic-stack)
+
 ### Stack
 - [Express](https://expressjs.com/)
   - [MDN's guide on server-side programming with express](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
@@ -10,6 +12,7 @@
   - [Linuxize's guide on installing postgres on debian](https://linuxize.com/post/how-to-install-postgresql-on-debian-10/)
   - [Postgres docker image's quick reference](https://github.com/docker-library/docs/blob/master/postgres/README.md)
   - [Setting up postgres and pgadmin on docker](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin)
+  - [Pgadmin environment variables](https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html)
 - [Docker]()
   - [Docker's node.js language-specific guide](https://docs.docker.com/language/nodejs/)
 

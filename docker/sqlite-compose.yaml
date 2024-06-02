@@ -30,7 +30,6 @@ services:
   #     dockerfile: docker/Dockerfile
   #   env_file:
   #     - path: ../.env
-  #   network_mode: host
   #   ports:
   #     - 4983:4983
   #   volumes:

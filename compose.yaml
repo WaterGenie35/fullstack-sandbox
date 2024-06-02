@@ -65,13 +65,14 @@ services:
       # refers to the volumes/db-data definition at the bottom of this file
       - db-data:/var/lib/postgresql/data
 
+  # TODO: check drizzle studio stuff
   # drizzle-studio:
   #   build:
   #     context: ..
   #     dockerfile: docker/Dockerfile
   #   env_file:
   #     - path: ../.env
-  #   # TODO: check this
+  #   # this is wrong, don't use host's drizzle studio
   #   # network_mode: host
   #   # ports:
   #   #   - 4983:4983
@@ -79,10 +80,13 @@ services:
   #     - ../drizzle:/usr/src/app/drizzle
   #   command: npm run db-studio
 
-  # TODO: add pgadmin
-  # pgadmin:
-  #   image: dpage/pgadmin4:latest
-  #   # attach: false
+  # Setup: https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    attach: false
+    env_file: .env
+    ports:
+      - 5050:80
 
 volumes:
   db-data:
