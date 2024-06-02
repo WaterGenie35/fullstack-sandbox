@@ -24,18 +24,18 @@ services:
       - ../drizzle:/usr/src/app/drizzle
     command: npm run app
   
-  studio:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    env_file:
-      - path: ../.env
-    network_mode: host
-    ports:
-      - 4983:4983
-    volumes:
-      - ../drizzle:/usr/src/app/drizzle
-    command: npm run db-studio
+  # studio:
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/Dockerfile
+  #   env_file:
+  #     - path: ../.env
+  #   network_mode: host
+  #   ports:
+  #     - 4983:4983
+  #   volumes:
+  #     - ../drizzle:/usr/src/app/drizzle
+  #   command: npm run db-studio
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
