@@ -41,6 +41,8 @@ services:
     # so we can use the init script only if we need something more
     env_file: .env
     environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
       # refers to the secrets/db-password definition at the bottom of this file
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
       - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
@@ -50,10 +52,13 @@ services:
     expose:
       - 5432
     healthcheck:
+      # Postgres could be setup correctly from env but pg_isready still needs to know:
       # https://stackoverflow.com/a/76669295
       test: [
         "CMD",
-        "pg_isready"
+        "pg_isready",
+        "--username=${DATABASE_USER}",
+        "--dbname=${DATABASE_NAME}"
       ]
       interval: 10s
       timeout: 5s
@@ -77,6 +82,9 @@ services:
   #   command: npm run db-studio
 
   # TODO: add pgadmin
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   # attach: false
 
 volumes:
   db-data:
