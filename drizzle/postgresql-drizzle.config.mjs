@@ -10,11 +10,11 @@ const drizzleConfig = {
   out          : './drizzle',
   driver       : 'pg',
   dbCredentials: {
-    host    : process.env.DATABASE_HOST,
-    port    : process.env.DATABASE_PORT,
-    user    : process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME
+    host    : process.env.POSTGRES_HOST,
+    port    : process.env.POSTGRES_PORT,
+    user    : process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PW,
+    database: process.env.POSTGRES_DB
   }
 };
 

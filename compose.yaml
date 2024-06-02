@@ -21,7 +21,7 @@ services:
     env_file: .env
     environment:
       # refers to the db service name
-      - DATABASE_HOST=db
+      - POSTGRES_HOST=db
     ports:
       # HOST_PORT:CONTAINER_PORT
       - 3000:3000
@@ -41,8 +41,6 @@ services:
     # so we can use the init script only if we need something more
     env_file: .env
     environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_USER=${DATABASE_USER}
       # refers to the secrets/db-password definition at the bottom of this file
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
       - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
@@ -57,8 +55,8 @@ services:
       test: [
         "CMD",
         "pg_isready",
-        "--username=${DATABASE_USER}",
-        "--dbname=${DATABASE_NAME}"
+        "--dbname=${POSTGRES_DB}",
+        "--username=${POSTGRES_USER}"
       ]
       interval: 10s
       timeout: 5s
