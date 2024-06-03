@@ -8,29 +8,35 @@
 
 ARG NODE_VERSION=20.12.1
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine as base
+    WORKDIR /usr/src/app
+    EXPOSE 3000
 
-WORKDIR /usr/src/app
-
-USER root
-COPY docker/entrypoint.sh .
-RUN chmod +x ./entrypoint.sh
+# TODO: check migration workflow; separate it from the default?
+# USER root
+# COPY docker/entrypoint.sh .
+# RUN chmod +x ./entrypoint.sh
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
 # Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
 # into this layer.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci
-    # npm ci --omit=dev
 
-# Run the application as a non-root user.
-USER node
+# https://docs.docker.com/language/nodejs/develop/#configure-and-run-a-development-container
+FROM base as dev
+    RUN --mount=type=bind,source=package.json,target=package.json \
+        --mount=type=bind,source=package-lock.json,target=package-lock.json \
+        --mount=type=cache,target=/root/.npm \
+        npm ci --include=dev
+    USER node
+    COPY . .
+    CMD npm run app-dev
 
-# Copy the rest of the source files into the image.
-COPY . .
-
-# Expose the port that the application listens on.
-EXPOSE 3000
+FROM base as prod
+    RUN --mount=type=bind,source=package.json,target=package.json \
+        --mount=type=bind,source=package-lock.json,target=package-lock.json \
+        --mount=type=cache,target=/root/.npm \
+        npm ci --omit=dev
+    USER node
+    COPY . .
+    CMD npm run app

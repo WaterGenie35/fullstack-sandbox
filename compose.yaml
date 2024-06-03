@@ -14,6 +14,8 @@ services:
       db:
         condition: service_healthy
     build:
+      # see dockerfile
+      target: dev
       # relative to docker-compose command running directory
       context: .
       # relative to build > context
@@ -28,7 +30,6 @@ services:
     volumes:
       # See Dockerfile WORKDIR
       - ./drizzle:/usr/src/app/drizzle
-    entrypoint: ./entrypoint.sh
   
   # TODO: check migration workflow and update the package.json scripts
   db:
