@@ -8,6 +8,10 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 
+# TODO: revise package.json scripts and readme instructions after all of this
+# - Check what docker compose is actually doing
+# - Go through all the standard worflows;
+#   - start/stop/restart/debug/migraiton/adding mock data/cleaning up
 services:
   app:
     depends_on:
@@ -27,9 +31,14 @@ services:
     ports:
       # HOST_PORT:CONTAINER_PORT
       - 3000:3000
+      # TODO: check debugging,
+      # - tuts: https://docs.docker.com/language/nodejs/develop/#configure-and-run-a-development-container
+      # - example src: https://github.com/docker/docker-nodejs-sample
+      - 9229:9229 # debugging
     volumes:
       # See Dockerfile WORKDIR
       - ./drizzle:/usr/src/app/drizzle
+      - ./src:/usr/src/app/src
   
   # TODO: check migration workflow and update the package.json scripts
   db:
